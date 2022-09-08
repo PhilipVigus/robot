@@ -5,6 +5,14 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
-    <include file="db/changelog/create-rooms-table.xml"/>
-    <include file="db/changelog/bootstrap-data.xml"/>
+    <changeSet id="2" author="Phil Vigus">
+        <preConditions onFail="MARK_RAN">
+            <tableIsEmpty tableName="rooms"/>
+        </preConditions>
+
+        <insert tableName="rooms">
+            <column name="length" value="3"/>
+            <column name="width" value="2"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
