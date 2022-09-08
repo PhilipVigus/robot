@@ -9,17 +9,17 @@ class RoomTest {
     void getWidthShouldReturnTheWidth() {
         int width = 1;
 
-        Room room = new Room(width, 2);
+        Room room = new Room(2, width);
 
-        assertEquals(width, room.width());
+        assertEquals(width, room.getWidth());
     }
 
     @Test
     void getLengthShouldReturnTheLength() {
         int length = 1;
 
-        Room room = new Room(2, length);
+        Room room = new Room(length, 2);
 
-        assertEquals(length, room.length());
+        assertEquals(length, room.getLength());
     }
 }
