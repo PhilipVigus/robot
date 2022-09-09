@@ -1,5 +1,6 @@
 package com.philvigus.robot.services;
 
+import com.philvigus.robot.domain.Room;
 import com.philvigus.robot.repositories.RoomRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,5 +28,14 @@ class RoomServiceTest {
         roomService.findAll();
 
         verify(roomRepository, times(1)).findAll();
+    }
+
+    @Test
+    void saveCallsSaveOnTheRoomRepository() {
+        Room room = new Room(1, 2);
+        
+        roomService.save(room);
+
+        verify(roomRepository, times(1)).save(room);
     }
 }
