@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Table;
 import java.util.List;
 
+// Adapted from https://objectpartners.com/2021/07/14/resetting-database-between-spring-integration-tests/
 @RequiredArgsConstructor
 @Service
 public class DatabaseResetService {
@@ -24,12 +25,12 @@ public class DatabaseResetService {
                 .map(this::convertToTableName).toList();
     }
 
-    private String convertToTableName(Table table) {
-        String schema = table.schema();
-        String tableName = table.name();
+    private String convertToTableName(final Table table) {
+        final String schema = table.schema();
+        final String tableName = table.name();
 
-        String convertedSchema = StringUtils.hasText(schema) ? schema.toLowerCase() + "." : "";
-        String convertedTableName = tableName.replaceAll("([a-z])([A-Z])", "$1_$2");
+        final String convertedSchema = StringUtils.hasText(schema) ? schema.toLowerCase() + "." : "";
+        final String convertedTableName = tableName.replaceAll("([a-z])([A-Z])", "$1_$2");
 
         return convertedSchema + convertedTableName;
     }
@@ -40,7 +41,7 @@ public class DatabaseResetService {
 
         entityManager.createNativeQuery("SET CONSTRAINTS ALL DEFERRED").executeUpdate();
 
-        for (String tableName : tableNames) {
+        for (final String tableName : tableNames) {
             entityManager.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate();
         }
 

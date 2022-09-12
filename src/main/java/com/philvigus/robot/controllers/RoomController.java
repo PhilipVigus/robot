@@ -16,10 +16,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/rooms")
 public class RoomController {
-    RoomService roomService;
+    private final RoomService roomService;
 
     @Autowired
-    public RoomController(RoomService roomService) {
+    public RoomController(final RoomService roomService) {
         this.roomService = roomService;
     }
 
@@ -29,10 +29,10 @@ public class RoomController {
     }
 
     @PostMapping
-    public ResponseEntity<Room> createRoom(@RequestBody RoomDto roomDto) {
-        RoomMapper roomMapper = Mappers.getMapper(RoomMapper.class);
+    public ResponseEntity<Room> createRoom(final @RequestBody RoomDto roomDto) {
+        final RoomMapper roomMapper = Mappers.getMapper(RoomMapper.class);
 
-        Room room = roomMapper.dtoToRoom(roomDto);
+        final Room room = roomMapper.dtoToRoom(roomDto);
 
         return new ResponseEntity<>(roomService.save(room), new HttpHeaders(), HttpStatus.CREATED);
     }

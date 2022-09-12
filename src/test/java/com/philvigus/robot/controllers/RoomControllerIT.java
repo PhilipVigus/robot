@@ -52,7 +52,8 @@ class RoomControllerIT {
     void getRoomsShouldGetAllRooms() throws Exception {
         final int length = 5;
         final int width = 6;
-        Room room = new Room(length, width);
+
+        final Room room = new Room(length, width);
 
         roomService.save(room);
 
@@ -68,20 +69,21 @@ class RoomControllerIT {
         final int length = 5;
         final int width = 6;
 
-        ObjectMapper mapper = new ObjectMapper();
-        Room room = new Room(length, width);
-        String json = mapper.writeValueAsString(room);
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final Room room = new Room(length, width);
+        final String json = mapper.writeValueAsString(room);
 
         mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.width", is(width)))
                 .andExpect(jsonPath("$.length", is(length)));
 
-        List<Room> rooms = roomService.findAll();
+        final List<Room> rooms = roomService.findAll();
 
         assertEquals(1, rooms.size());
 
-        Room createdRoom = rooms.get(0);
+        final Room createdRoom = rooms.get(0);
 
         assertNotNull(createdRoom.getId());
         assertEquals(length, createdRoom.getLength());

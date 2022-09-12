@@ -25,11 +25,11 @@ class RoomServiceIT {
 
     @Test
     void savePersistsARoomToTheDatabase() {
-        Room room = new Room(1, 2);
+        final Room room = new Room(1, 2);
 
-        Room savedRoom = roomService.save(room);
+        final Room savedRoom = roomService.save(room);
 
-        List<Room> rooms = roomService.findAll();
+        final List<Room> rooms = roomService.findAll();
 
         assertFalse(rooms.isEmpty());
         assertNotNull(savedRoom.getId());
@@ -37,17 +37,17 @@ class RoomServiceIT {
 
     @Test
     void findAllReturnsAnEmptyListWhenThereAreNoRooms() {
-        List<Room> rooms = roomService.findAll();
+        final List<Room> rooms = roomService.findAll();
 
         assertTrue(rooms.isEmpty());
     }
 
     @Test
     void findAllReturnsAListOfExistingRooms() {
-        Room firstSavedRoom = roomService.save(new Room(1, 2));
-        Room secondSavedRoom = roomService.save(new Room(3, 4));
+        final Room firstSavedRoom = roomService.save(new Room(1, 2));
+        final Room secondSavedRoom = roomService.save(new Room(3, 4));
 
-        List<Room> rooms = roomService.findAll();
+        final List<Room> rooms = roomService.findAll();
 
 
         assertEquals(2, rooms.size());
