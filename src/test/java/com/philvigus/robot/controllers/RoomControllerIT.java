@@ -3,6 +3,7 @@ package com.philvigus.robot.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.philvigus.robot.domain.Room;
+import com.philvigus.robot.dtos.RoomDto;
 import com.philvigus.robot.services.DatabaseResetService;
 import com.philvigus.robot.services.RoomService;
 import org.junit.jupiter.api.AfterEach;
@@ -22,8 +23,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -88,5 +88,28 @@ class RoomControllerIT {
         assertNotNull(createdRoom.getId());
         assertEquals(length, createdRoom.getLength());
         assertEquals(width, createdRoom.getWidth());
+    }
+
+    @Test
+    void updateRoomShouldUpdateAnExistingRoom() throws Exception {
+        final int updatedLength = 5;
+        final int updatedWidth = 6;
+
+        final Room savedRoom = roomService.save(new Room(1, 2));
+
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final String json = mapper.writeValueAsString(roomDto);
+
+        mockMvc.perform(put("/rooms/" + savedRoom.getId()).contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isNoContent())
+                .andExpect(jsonPath("$.width", is(updatedWidth)))
+                .andExpect(jsonPath("$.length", is(updatedLength)));
+
+        final Room room = roomService.findById(savedRoom.getId()).orElseThrow();
+
+        assertEquals(updatedWidth, room.getWidth());
+        assertEquals(updatedLength, room.getLength());
     }
 }

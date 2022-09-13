@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomDto {
+    private Long id;
     private int length;
     private int width;
 }
