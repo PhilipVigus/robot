@@ -40,7 +40,7 @@ class RoomServiceIT {
 
     @Test
     void findByIdReturnsAnEmptyOptionalWhenTheIdIsNotFound() {
-        Optional<Room> room = roomService.findById(1L);
+        final Optional<Room> room = roomService.findById(1L);
 
         assertTrue(room.isEmpty());
     }
@@ -88,7 +88,7 @@ class RoomServiceIT {
 
         final Room savedRoom = roomService.save(room);
 
-        RoomDto updatedDto = roomMapper.roomToDto(savedRoom);
+        final RoomDto updatedDto = roomMapper.roomToDto(savedRoom);
         updatedDto.setWidth(updatedWidth);
         updatedDto.setLength(updatedLength);
 
@@ -103,8 +103,8 @@ class RoomServiceIT {
 
     @Test
     void deleteDeletesTheRoomWithTheSpecifiedId() {
-        Room roomToKeep = roomService.save(new Room(3, 4));
-        Room roomToDelete = roomService.save(new Room(1, 2));
+        final Room roomToKeep = roomService.save(new Room(3, 4));
+        final Room roomToDelete = roomService.save(new Room(1, 2));
 
         roomService.delete(roomToDelete.getId());
 

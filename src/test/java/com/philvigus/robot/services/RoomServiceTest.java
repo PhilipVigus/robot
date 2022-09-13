@@ -47,7 +47,7 @@ class RoomServiceTest {
 
     @Test
     void saveCallsSaveOnTheRoomRepository() {
-        Room room = new Room(1, 2);
+        final Room room = new Room(1, 2);
 
         roomService.save(room);
 
@@ -72,8 +72,8 @@ class RoomServiceTest {
     void updateCallsSaveOnTheRoomRepositoryWhenARoomWithTheDtoIdExists() {
         final RoomMapper roomMapper = Mappers.getMapper(RoomMapper.class);
 
-        RoomDto roomDto = new RoomDto(1L, 2, 3);
-        Room room = roomMapper.dtoToRoom(roomDto);
+        final RoomDto roomDto = new RoomDto(1L, 2, 3);
+        final Room room = roomMapper.dtoToRoom(roomDto);
 
         when(roomRepository.findById(1L)).thenReturn(Optional.of(room));
 
@@ -84,7 +84,7 @@ class RoomServiceTest {
 
     @Test
     void updateThrowsAnExceptionWhenARoomWithTheDtoIdDoesNotExist() {
-        RoomDto roomDto = new RoomDto(1L, 2, 3);
+        final RoomDto roomDto = new RoomDto(1L, 2, 3);
 
         when(roomRepository.findById(1L)).thenReturn(Optional.empty());
 

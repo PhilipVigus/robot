@@ -14,11 +14,11 @@ import java.util.Optional;
 public class RoomService {
     private final RoomRepository roomRepository;
 
-    public RoomService(RoomRepository roomRepository) {
+    public RoomService(final RoomRepository roomRepository) {
         this.roomRepository = roomRepository;
     }
 
-    public Optional<Room> findById(Long id) {
+    public Optional<Room> findById(final Long id) {
         return roomRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class RoomService {
         return roomRepository.findAll();
     }
 
-    public Room save(Room room) {
+    public Room save(final Room room) {
         return roomRepository.save(room);
     }
 
@@ -41,7 +41,7 @@ public class RoomService {
         return room;
     }
 
-    public void delete(Long id) {
+    public void delete(final Long id) {
         roomRepository.deleteById(id);
     }
 }
