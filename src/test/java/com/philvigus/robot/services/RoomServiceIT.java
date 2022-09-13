@@ -100,4 +100,15 @@ class RoomServiceIT {
         assertEquals(updatedWidth, updatedRoom.getWidth());
         assertEquals(updatedLength, updatedRoom.getLength());
     }
+
+    @Test
+    void deleteDeletesTheRoomWithTheSpecifiedId() {
+        Room roomToKeep = roomService.save(new Room(3, 4));
+        Room roomToDelete = roomService.save(new Room(1, 2));
+
+        roomService.delete(roomToDelete.getId());
+
+        assertTrue(roomService.findById(roomToDelete.getId()).isEmpty());
+        assertTrue(roomService.findById(roomToKeep.getId()).isPresent());
+    }
 }

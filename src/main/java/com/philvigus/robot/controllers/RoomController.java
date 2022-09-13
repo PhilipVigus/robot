@@ -42,4 +42,11 @@ public class RoomController {
         roomDto.setId(id);
         return new ResponseEntity<>(roomService.update(roomDto), new HttpHeaders(), HttpStatus.NO_CONTENT);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRoom(final @PathVariable Long id) {
+        roomService.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

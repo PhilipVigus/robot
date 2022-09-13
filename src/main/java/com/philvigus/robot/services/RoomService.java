@@ -40,4 +40,8 @@ public class RoomService {
 
         return room;
     }
+
+    public void delete(Long id) {
+        roomRepository.deleteById(id);
+    }
 }

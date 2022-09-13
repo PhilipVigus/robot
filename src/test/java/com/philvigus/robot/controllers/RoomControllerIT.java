@@ -21,8 +21,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -111,5 +110,15 @@ class RoomControllerIT {
 
         assertEquals(updatedWidth, room.getWidth());
         assertEquals(updatedLength, room.getLength());
+    }
+
+    @Test
+    void deleteRoomShouldDeleteTheRoomWithTheSpecifiedId() throws Exception {
+        final Room savedRoom = roomService.save(new Room(1, 2));
+        
+        mockMvc.perform(delete("/rooms/" + savedRoom.getId()).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+
+        assertTrue(roomService.findById(savedRoom.getId()).isEmpty());
     }
 }

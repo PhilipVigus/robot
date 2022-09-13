@@ -91,4 +91,13 @@ class RoomServiceTest {
         assertThrows(NoSuchElementException.class, () -> roomService.update(roomDto));
 
     }
+
+    @Test
+    void deleteCallsDeleteOnTheRepository() {
+        final long id = 1L;
+
+        roomService.delete(id);
+
+        verify(roomRepository, times(1)).deleteById(id);
+    }
 }
