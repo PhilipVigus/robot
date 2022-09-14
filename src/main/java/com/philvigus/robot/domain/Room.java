@@ -1,11 +1,13 @@
 package com.philvigus.robot.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,6 +19,11 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Robot> robots;
+
     private int length;
     private int width;
 
