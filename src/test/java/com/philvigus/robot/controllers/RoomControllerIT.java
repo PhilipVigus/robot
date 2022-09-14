@@ -90,6 +90,82 @@ class RoomControllerIT {
     }
 
     @Test
+    void creatingARoomWithAWidthLessThanOneReturnsAnError() throws Exception {
+        final int length = 5;
+        final int width = 0;
+
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final Room room = new Room(length, width);
+        final String json = mapper.writeValueAsString(room);
+
+        mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.width", is("The width must be between 1 and 1024 inclusive")));
+
+        final List<Room> rooms = roomService.findAll();
+
+        assertEquals(0, rooms.size());
+    }
+
+    @Test
+    void creatingARoomWithALengthLessThanOneReturnsAnError() throws Exception {
+        final int length = 0;
+        final int width = 5;
+
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final Room room = new Room(length, width);
+        final String json = mapper.writeValueAsString(room);
+
+        mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.length", is("The length must be between 1 and 1024 inclusive")));
+
+        final List<Room> rooms = roomService.findAll();
+
+        assertEquals(0, rooms.size());
+    }
+
+    @Test
+    void creatingARoomWithAWidthGreaterThan1024ReturnsAnError() throws Exception {
+        final int length = 5;
+        final int width = 1025;
+
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final Room room = new Room(length, width);
+        final String json = mapper.writeValueAsString(room);
+
+        mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.width", is("The width must be between 1 and 1024 inclusive")));
+
+        final List<Room> rooms = roomService.findAll();
+
+        assertEquals(0, rooms.size());
+    }
+
+    @Test
+    void creatingARoomWithALengthGreaterThan1024ReturnsAnError() throws Exception {
+        final int length = 1025;
+        final int width = 5;
+
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final Room room = new Room(length, width);
+        final String json = mapper.writeValueAsString(room);
+
+        mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.length", is("The length must be between 1 and 1024 inclusive")));
+
+        final List<Room> rooms = roomService.findAll();
+
+        assertEquals(0, rooms.size());
+    }
+
+    @Test
     void updateRoomShouldUpdateAnExistingRoom() throws Exception {
         final int updatedLength = 5;
         final int updatedWidth = 6;
@@ -113,9 +189,109 @@ class RoomControllerIT {
     }
 
     @Test
+    void updatingARoomWithAWidthLessThanOneReturnsAnError() throws Exception {
+        final int originalLength = 3;
+        final int originalWidth = 4;
+
+        final int updatedLength = 5;
+        final int updatedWidth = 0;
+
+        final Room savedRoom = roomService.save(new Room(originalLength, originalWidth));
+
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final String json = mapper.writeValueAsString(roomDto);
+
+        mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.width", is("The width must be between 1 and 1024 inclusive")));
+
+        final Room room = roomService.findById(savedRoom.getId()).orElseThrow();
+
+        assertEquals(originalWidth, room.getWidth());
+        assertEquals(originalLength, room.getLength());
+    }
+
+    @Test
+    void updatingARoomWithALengthLessThanOneReturnsAnError() throws Exception {
+        final int originalLength = 3;
+        final int originalWidth = 4;
+
+        final int updatedLength = 0;
+        final int updatedWidth = 5;
+
+        final Room savedRoom = roomService.save(new Room(originalLength, originalWidth));
+
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final String json = mapper.writeValueAsString(roomDto);
+
+        mockMvc.perform(put("/rooms/" + savedRoom.getId()).contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.length", is("The length must be between 1 and 1024 inclusive")));
+
+        final Room room = roomService.findById(savedRoom.getId()).orElseThrow();
+
+        assertEquals(originalWidth, room.getWidth());
+        assertEquals(originalLength, room.getLength());
+    }
+
+    @Test
+    void updatingARoomWithAWidthGreaterThan1024ReturnsAnError() throws Exception {
+        final int originalLength = 3;
+        final int originalWidth = 4;
+
+        final int updatedLength = 5;
+        final int updatedWidth = 1025;
+
+        final Room savedRoom = roomService.save(new Room(originalLength, originalWidth));
+
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final String json = mapper.writeValueAsString(roomDto);
+
+        mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.width", is("The width must be between 1 and 1024 inclusive")));
+
+        final Room room = roomService.findById(savedRoom.getId()).orElseThrow();
+
+        assertEquals(originalWidth, room.getWidth());
+        assertEquals(originalLength, room.getLength());
+    }
+
+    @Test
+    void updatingARoomWithALengthGreaterThan1024ReturnsAnError() throws Exception {
+        final int originalLength = 3;
+        final int originalWidth = 4;
+
+        final int updatedLength = 1025;
+        final int updatedWidth = 5;
+
+        final Room savedRoom = roomService.save(new Room(originalLength, originalWidth));
+
+        final ObjectMapper mapper = new ObjectMapper();
+
+        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final String json = mapper.writeValueAsString(roomDto);
+
+        mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.length", is("The length must be between 1 and 1024 inclusive")));
+
+        final Room room = roomService.findById(savedRoom.getId()).orElseThrow();
+
+        assertEquals(originalWidth, room.getWidth());
+        assertEquals(originalLength, room.getLength());
+    }
+
+    @Test
     void deleteRoomShouldDeleteTheRoomWithTheSpecifiedId() throws Exception {
         final Room savedRoom = roomService.save(new Room(1, 2));
-        
+
         mockMvc.perform(delete("/rooms/" + savedRoom.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
