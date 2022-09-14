@@ -174,7 +174,7 @@ class RoomControllerIT {
 
         final ObjectMapper mapper = new ObjectMapper();
 
-        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final RoomDto roomDto = new RoomDto(updatedLength, updatedWidth);
         final String json = mapper.writeValueAsString(roomDto);
 
         mockMvc.perform(put("/rooms/" + savedRoom.getId()).contentType(MediaType.APPLICATION_JSON).content(json))
@@ -200,7 +200,7 @@ class RoomControllerIT {
 
         final ObjectMapper mapper = new ObjectMapper();
 
-        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final RoomDto roomDto = new RoomDto(updatedLength, updatedWidth);
         final String json = mapper.writeValueAsString(roomDto);
 
         mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
@@ -225,7 +225,7 @@ class RoomControllerIT {
 
         final ObjectMapper mapper = new ObjectMapper();
 
-        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final RoomDto roomDto = new RoomDto(updatedLength, updatedWidth);
         final String json = mapper.writeValueAsString(roomDto);
 
         mockMvc.perform(put("/rooms/" + savedRoom.getId()).contentType(MediaType.APPLICATION_JSON).content(json))
@@ -250,7 +250,7 @@ class RoomControllerIT {
 
         final ObjectMapper mapper = new ObjectMapper();
 
-        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final RoomDto roomDto = new RoomDto(updatedLength, updatedWidth);
         final String json = mapper.writeValueAsString(roomDto);
 
         mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))
@@ -275,7 +275,7 @@ class RoomControllerIT {
 
         final ObjectMapper mapper = new ObjectMapper();
 
-        final RoomDto roomDto = new RoomDto(savedRoom.getId(), updatedLength, updatedWidth);
+        final RoomDto roomDto = new RoomDto(updatedLength, updatedWidth);
         final String json = mapper.writeValueAsString(roomDto);
 
         mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_JSON).content(json))

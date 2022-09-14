@@ -56,39 +56,45 @@ class RoomServiceTest {
 
     @Test
     void updateCallsFindByIdOnTheRoomRepository() {
+        final Long roomId = 1L;
+
         final RoomMapper roomMapper = Mappers.getMapper(RoomMapper.class);
 
-        final RoomDto roomDto = new RoomDto(1L, 2, 3);
+        final RoomDto roomDto = new RoomDto(2, 3);
         final Room room = roomMapper.dtoToRoom(roomDto);
 
-        when(roomRepository.findById(1L)).thenReturn(Optional.of(room));
+        when(roomRepository.findById(roomId)).thenReturn(Optional.of(room));
 
-        roomService.update(roomDto);
+        roomService.update(roomId, roomDto);
 
-        verify(roomRepository, times(1)).findById(1L);
+        verify(roomRepository, times(1)).findById(roomId);
     }
 
     @Test
     void updateCallsSaveOnTheRoomRepositoryWhenARoomWithTheDtoIdExists() {
+        final Long roomId = 1L;
+
         final RoomMapper roomMapper = Mappers.getMapper(RoomMapper.class);
 
-        final RoomDto roomDto = new RoomDto(1L, 2, 3);
+        final RoomDto roomDto = new RoomDto(2, 3);
         final Room room = roomMapper.dtoToRoom(roomDto);
 
-        when(roomRepository.findById(1L)).thenReturn(Optional.of(room));
+        when(roomRepository.findById(roomId)).thenReturn(Optional.of(room));
 
-        roomService.update(roomDto);
+        roomService.update(roomId, roomDto);
 
         verify(roomRepository, times(1)).save(room);
     }
 
     @Test
     void updateThrowsAnExceptionWhenARoomWithTheDtoIdDoesNotExist() {
-        final RoomDto roomDto = new RoomDto(1L, 2, 3);
+        final Long roomId = 1L;
 
-        when(roomRepository.findById(1L)).thenReturn(Optional.empty());
+        final RoomDto roomDto = new RoomDto(2, 3);
 
-        assertThrows(NoSuchElementException.class, () -> roomService.update(roomDto));
+        when(roomRepository.findById(roomId)).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementException.class, () -> roomService.update(roomId, roomDto));
 
     }
 

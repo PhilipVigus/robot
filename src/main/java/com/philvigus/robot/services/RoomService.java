@@ -30,10 +30,10 @@ public class RoomService {
         return roomRepository.save(room);
     }
 
-    public Room update(final RoomDto roomDto) {
+    public Room update(final Long id, final RoomDto roomDto) {
         final RoomMapper roomMapper = Mappers.getMapper(RoomMapper.class);
 
-        final Room room = roomRepository.findById(roomDto.getId()).orElseThrow();
+        final Room room = roomRepository.findById(id).orElseThrow();
 
         roomMapper.updateRoomFromDto(roomDto, room);
         roomRepository.save(room);

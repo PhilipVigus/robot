@@ -13,8 +13,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomDto {
-    private Long id;
-
     @NotNull(message = "A length must be specified")
     @Range(min = 1, max = 1024, message = "The length must be between 1 and 1024 inclusive")
     private int length;

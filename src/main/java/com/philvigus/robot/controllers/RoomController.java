@@ -44,8 +44,7 @@ public class RoomController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Room> updateRoom(final @PathVariable Long id, final @Valid @RequestBody RoomDto roomDto) {
-        roomDto.setId(id);
-        return new ResponseEntity<>(roomService.update(roomDto), new HttpHeaders(), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(roomService.update(id, roomDto), new HttpHeaders(), HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")

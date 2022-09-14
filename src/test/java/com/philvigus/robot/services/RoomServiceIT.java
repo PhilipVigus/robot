@@ -92,9 +92,9 @@ class RoomServiceIT {
         updatedDto.setWidth(updatedWidth);
         updatedDto.setLength(updatedLength);
 
-        roomService.update(updatedDto);
+        roomService.update(savedRoom.getId(), updatedDto);
 
-        final Room updatedRoom = roomService.findById(updatedDto.getId()).orElseThrow();
+        final Room updatedRoom = roomService.findById(savedRoom.getId()).orElseThrow();
 
         assertEquals(savedRoom, updatedRoom);
         assertEquals(updatedWidth, updatedRoom.getWidth());
