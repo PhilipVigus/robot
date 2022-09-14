@@ -6,4 +6,5 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
     <include file="db/changelog/create-rooms-table.xml"/>
+    <include file="db/changelog/create-robots-table.xml"/>
 </databaseChangeLog>

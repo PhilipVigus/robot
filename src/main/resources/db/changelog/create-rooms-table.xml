@@ -13,13 +13,13 @@
         </preConditions>
 
         <createTable tableName="rooms">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="length" type="int">
+            <column name="length" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="width" type="int">
+            <column name="width" type="bigint">
                 <constraints nullable="true"/>
             </column>
         </createTable>
