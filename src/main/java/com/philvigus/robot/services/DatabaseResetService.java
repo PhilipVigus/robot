@@ -42,7 +42,7 @@ public class DatabaseResetService {
         entityManager.createNativeQuery("SET CONSTRAINTS ALL DEFERRED").executeUpdate();
 
         for (final String tableName : tableNames) {
-            entityManager.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate();
+            entityManager.createNativeQuery("TRUNCATE TABLE " + tableName + " CASCADE").executeUpdate();
         }
 
         entityManager.createNativeQuery("COMMIT").executeUpdate();
