@@ -20,12 +20,17 @@ public class Robot {
     private Orientation orientation;
     private int x;
     private int y;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "room_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Room room;
+
+    public Robot(Orientation orientation, int x, int y) {
+        this.orientation = orientation;
+        this.x = x;
+        this.y = y;
+    }
 
     public void turnLeft() {
         orientation = orientation.turnLeft();
