@@ -6,6 +6,7 @@ import com.philvigus.robot.mappers.RoomMapper;
 import com.philvigus.robot.repositories.RoomRepository;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,7 @@ public class RoomService {
         return roomRepository.save(room);
     }
 
+    @Transactional
     public Room update(final Long id, final RoomDto roomDto) {
         final RoomMapper roomMapper = Mappers.getMapper(RoomMapper.class);
 
