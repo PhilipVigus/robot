@@ -19,7 +19,7 @@ public class Robot {
     private int x;
     private int y;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id", nullable = false)
     private Room room;
 
     public Robot(Orientation orientation, int x, int y) {
