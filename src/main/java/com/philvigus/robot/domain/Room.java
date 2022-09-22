@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,6 +29,12 @@ public class Room {
     public Room(final int length, final int width) {
         this.length = length;
         this.width = width;
+        this.robots = new HashSet<>();
+    }
+
+    public void addRobot(final Robot robot) {
+        robots.add(robot);
+        robot.addToRoom(this);
     }
 
     @Override

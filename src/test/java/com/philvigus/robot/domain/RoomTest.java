@@ -22,4 +22,15 @@ class RoomTest {
 
         assertEquals(length, room.getLength());
     }
+
+    @Test
+    void addRobotAddsARobotToTheRoom() {
+        final Robot robot = new Robot(Orientation.N, 1, 2);
+        final Room room = new Room(3, 4);
+
+        room.addRobot(robot);
+
+        assertEquals(1, room.getRobots().size());
+        assertEquals(robot, room.getRobots().stream().findFirst().get());
+    }
 }

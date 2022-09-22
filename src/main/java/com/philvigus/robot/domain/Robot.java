@@ -28,6 +28,10 @@ public class Robot {
         this.y = y;
     }
 
+    public void addToRoom(final Room room) {
+        this.room = room;
+    }
+
     public void turnLeft() {
         orientation = orientation.turnLeft();
     }

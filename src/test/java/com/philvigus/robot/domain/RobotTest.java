@@ -9,7 +9,7 @@ class RobotTest {
 
     @Test
     void getOrientationReturnsTheRobotsOrientation() {
-        Orientation orientation = Orientation.N;
+        final Orientation orientation = Orientation.N;
 
         robot = new Robot(orientation, 1, 2);
 
@@ -34,7 +34,7 @@ class RobotTest {
 
     @Test
     void moveForwardWhenFacingNorthMovesTheRobotOneStepNorth() {
-        int initialY = 2;
+        final int initialY = 2;
         robot = new Robot(Orientation.N, 1, initialY);
         robot.moveForward();
 
@@ -43,7 +43,7 @@ class RobotTest {
 
     @Test
     void moveForwardWhenFacingEastMovesTheRobotOneStepEast() {
-        int initialX = 2;
+        final int initialX = 2;
         robot = new Robot(Orientation.E, initialX, 1);
         robot.moveForward();
 
@@ -52,7 +52,7 @@ class RobotTest {
 
     @Test
     void moveForwardWhenFacingSouthMovesTheRobotOneStepSouth() {
-        int initialY = 2;
+        final int initialY = 2;
         robot = new Robot(Orientation.S, 1, initialY);
         robot.moveForward();
 
@@ -61,10 +61,20 @@ class RobotTest {
 
     @Test
     void moveForwardWhenFacingWestMovesTheRobotOneStepWest() {
-        int initialX = 2;
+        final int initialX = 2;
         robot = new Robot(Orientation.W, initialX, 1);
         robot.moveForward();
 
         assertEquals(initialX - 1, robot.getX());
+    }
+
+    @Test
+    void addToRoomAddsTheRobotToARoom() {
+        final Robot robot = new Robot(Orientation.N, 1, 2);
+        final Room room = new Room(3, 4);
+
+        robot.addToRoom(room);
+
+        assertEquals(room, robot.getRoom());
     }
 }
