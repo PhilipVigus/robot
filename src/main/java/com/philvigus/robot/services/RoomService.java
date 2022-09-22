@@ -1,5 +1,6 @@
 package com.philvigus.robot.services;
 
+import com.philvigus.robot.domain.Robot;
 import com.philvigus.robot.domain.Room;
 import com.philvigus.robot.dtos.RoomDto;
 import com.philvigus.robot.mappers.RoomMapper;
@@ -45,5 +46,9 @@ public class RoomService {
 
     public void delete(final Long id) {
         roomRepository.deleteById(id);
+    }
+
+    public void addRobot(final Room room, final Robot robot) {
+        room.addRobot(robot);
     }
 }
