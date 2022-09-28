@@ -17,4 +17,8 @@ public class RobotService {
     public List<Robot> findAllRobotsByRoomId(Long roomId) {
         return robotRepository.findAllByRoomId(roomId);
     }
+
+    public Robot save(Robot robot) {
+        return robotRepository.save(robot);
+    }
 }

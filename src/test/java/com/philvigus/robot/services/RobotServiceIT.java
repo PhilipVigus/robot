@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class RobotServiceIT {
@@ -50,6 +51,18 @@ class RobotServiceIT {
         assertEquals(2, robots.size());
         assertEquals(savedRoom.getId(), robots.get(0).getRoom().getId());
         assertEquals(savedRoom.getId(), robots.get(1).getRoom().getId());
+    }
 
+    @Test
+    void savePersistsARobotToTheDatabase() {
+        final Room room = new Room(3, 4);
+        final Room savedRoom = roomService.save(room);
+
+        final Robot robot = new Robot(Orientation.N, 1, 2);
+        savedRoom.addRobot(robot);
+
+        final Robot savedRobot = robotService.save(robot);
+
+        assertNotNull(savedRobot);
     }
 }
