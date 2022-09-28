@@ -20,7 +20,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
     private Set<Robot> robots;
 
     private int length;
@@ -34,7 +34,7 @@ public class Room {
 
     public void addRobot(final Robot robot) {
         robots.add(robot);
-        robot.addToRoom(this);
+        robot.setRoom(this);
     }
 
     @Override

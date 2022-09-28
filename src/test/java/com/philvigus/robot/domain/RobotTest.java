@@ -67,14 +67,4 @@ class RobotTest {
 
         assertEquals(initialX - 1, robot.getX());
     }
-
-    @Test
-    void addToRoomAddsTheRobotToARoom() {
-        final Robot robot = new Robot(Orientation.N, 1, 2);
-        final Room room = new Room(3, 4);
-
-        robot.addToRoom(room);
-
-        assertEquals(room, robot.getRoom());
-    }
 }

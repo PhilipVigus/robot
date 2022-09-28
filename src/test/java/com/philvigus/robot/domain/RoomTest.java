@@ -31,6 +31,6 @@ class RoomTest {
         room.addRobot(robot);
 
         assertEquals(1, room.getRobots().size());
-        assertEquals(robot, room.getRobots().stream().findFirst().get());
+        assertEquals(robot, room.getRobots().stream().findFirst().orElseThrow());
     }
 }

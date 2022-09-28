@@ -3,6 +3,7 @@ package com.philvigus.robot.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Table(name = "robots")
 public class Robot {
     @Id
@@ -27,11 +29,7 @@ public class Robot {
         this.x = x;
         this.y = y;
     }
-
-    public void addToRoom(final Room room) {
-        this.room = room;
-    }
-
+    
     public void turnLeft() {
         orientation = orientation.turnLeft();
     }
