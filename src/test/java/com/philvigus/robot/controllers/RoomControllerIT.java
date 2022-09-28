@@ -35,7 +35,7 @@ class RoomControllerIT {
     @Autowired
     RoomService roomService;
     @Autowired
-    private WebApplicationContext context;
+    WebApplicationContext context;
 
     @BeforeEach
     void setUp() {

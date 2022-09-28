@@ -1,5 +1,7 @@
 package com.philvigus.robot.services;
 
+import com.philvigus.robot.domain.Orientation;
+import com.philvigus.robot.domain.Robot;
 import com.philvigus.robot.repositories.RobotRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,15 @@ class RobotServiceTest {
         MockitoAnnotations.openMocks(this);
 
         robotService = new RobotService(robotRepository);
+    }
+
+    @Test
+    void saveCallsSaveOnTheRepository() {
+        Robot robot = new Robot(Orientation.N, 1, 2);
+
+        robotService.save(robot);
+
+        verify(robotRepository, times(1)).save(robot);
     }
 
     @Test

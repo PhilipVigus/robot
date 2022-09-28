@@ -1,5 +1,6 @@
 package com.philvigus.robot.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class Room {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "room", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Robot> robots;
 
     private int length;

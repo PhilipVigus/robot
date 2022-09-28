@@ -14,6 +14,10 @@ public class RobotService {
         this.robotRepository = robotRepository;
     }
 
+    public Robot save(Robot robot) {
+        return robotRepository.save(robot);
+    }
+
     public List<Robot> findAllRobotsByRoomId(Long roomId) {
         return robotRepository.findAllByRoomId(roomId);
     }
