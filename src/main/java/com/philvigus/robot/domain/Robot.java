@@ -24,12 +24,12 @@ public class Robot {
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
 
-    public Robot(Orientation orientation, int x, int y) {
+    public Robot(final Orientation orientation, final int x, final int y) {
         this.orientation = orientation;
         this.x = x;
         this.y = y;
     }
-    
+
     public void turnLeft() {
         orientation = orientation.turnLeft();
     }

@@ -10,15 +10,15 @@ import java.util.List;
 public class RobotService {
     private final RobotRepository robotRepository;
 
-    public RobotService(RobotRepository robotRepository) {
+    public RobotService(final RobotRepository robotRepository) {
         this.robotRepository = robotRepository;
     }
 
-    public List<Robot> findAllRobotsByRoomId(Long roomId) {
+    public List<Robot> findAllRobotsByRoomId(final Long roomId) {
         return robotRepository.findAllByRoomId(roomId);
     }
 
-    public Robot save(Robot robot) {
+    public Robot save(final Robot robot) {
         return robotRepository.save(robot);
     }
 }

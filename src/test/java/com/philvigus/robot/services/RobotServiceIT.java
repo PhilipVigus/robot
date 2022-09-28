@@ -46,7 +46,7 @@ class RobotServiceIT {
         final Room savedRoom = roomService.save(room);
         roomService.save(otherRoom);
 
-        List<Robot> robots = robotService.findAllRobotsByRoomId(savedRoom.getId());
+        final List<Robot> robots = robotService.findAllRobotsByRoomId(savedRoom.getId());
 
         assertEquals(2, robots.size());
         assertEquals(savedRoom.getId(), robots.get(0).getRoom().getId());

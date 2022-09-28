@@ -14,9 +14,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequestMapping("/rooms")
@@ -56,12 +56,12 @@ public class RoomController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException exception) {
-        Map<String, String> errors = new HashMap<>();
+    public Map<String, String> handleValidationExceptions(final MethodArgumentNotValidException exception) {
+        final Map<String, String> errors = new ConcurrentHashMap<>();
 
         exception.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
+            final String fieldName = ((FieldError) error).getField();
+            final String errorMessage = error.getDefaultMessage();
 
             errors.put(fieldName, errorMessage);
         });

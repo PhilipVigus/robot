@@ -35,7 +35,7 @@ class RobotServiceTest {
 
     @Test
     void saveCallsSaveOnTheRepository() {
-        Robot robot = new Robot(Orientation.N, 1, 2);
+        final Robot robot = new Robot(Orientation.N, 1, 2);
 
         robotService.save(robot);
 
